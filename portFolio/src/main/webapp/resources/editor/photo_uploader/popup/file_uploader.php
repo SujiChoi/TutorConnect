@@ -24,7 +24,9 @@ if(bSuccessUpload) {
 	$url .= "&sFileURL=/editor/upload/".urlencode(urlencode($name));
 }
 // FAILED
-else {
+else 
+
+{
 	$url .= '&errstr=error';
 }
 

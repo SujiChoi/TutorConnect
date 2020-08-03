@@ -275,11 +275,11 @@
 			<input name="fromNum" type="hidden" value="<%=userNum%>"> 
 			<tr>
 				<td style="text-align: right;padding:0px 15px;">제 목</td>
-				<td><input name="inqTitle" style="width:650px;"></td>
+				<td><input name="inqTitle" style="width:670px;"></td>
 			</tr>
 			<tr>
 				<td style="text-align: right;padding:0px 15px;">내 용</td>
-				<td><textarea id="textAreaContent" name="inqContent" rows="17" cols="90"></textarea></td>
+				<td ><textarea id="textAreaContent" name="inqContent" rows="20" cols="90"></textarea></td>
 			</tr>
 			
 			<tr>
