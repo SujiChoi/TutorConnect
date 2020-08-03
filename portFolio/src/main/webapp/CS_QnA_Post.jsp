@@ -239,14 +239,17 @@
 	}
 	function checkInputs() {
 		frm = document.postFrm;
-		if(frm.inqContent.value==""){
+		if(frm.textAreaContent.value==""){
 			alert("내용을 입력해 주세요.");
 			frm.inqContent.focus();
 			return false;
 		}
 	}
 	
-    </script>
+	</script>
+	<!-- 스마트 에디터 추가 -->
+<script type="text/javascript" src="resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="resources/editor/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
   </head>
   <body>
     <header include-html="header.jsp"></header>
@@ -263,8 +266,8 @@
         </div>
         <div id="myPageContents">
           <div id="myPageContent">
-<form name="postFrm" method="post" action="CustomerService_QnA_Post_Proc.jsp" 
-onsubmit="return checkInputs()" enctype="multipart/form-data">
+<form name="postFrm" method="post" action="CustomerService_QnA_Post_Proc.jsp" onsubmit="return checkInputs()" enctype="multipart/form-data">
+
 <table cellpadding="3" align="center">
 	<tr>
 		<td align=center>
@@ -276,7 +279,7 @@ onsubmit="return checkInputs()" enctype="multipart/form-data">
 			</tr>
 			<tr>
 				<td style="text-align: right;padding:0px 15px;">내 용</td>
-				<td><textarea name="inqContent" rows="17" cols="90"></textarea></td>
+				<td><textarea id="textAreaContent" name="inqContent" rows="17" cols="90"></textarea></td>
 			</tr>
 			
 			<tr>
@@ -301,7 +304,7 @@ onsubmit="return checkInputs()" enctype="multipart/form-data">
 			</tr>
 			<tr>
 				<td align="right" colspan="2"><br>
-					 <input id="btn" type="submit" value="등록">
+					 <input id="btn" type="button" value="등록" onClick="submitContents(this)">
 					 <input id="btn" type="reset" value="다시쓰기">
 					 <input id="btn" type="button" value="리스트" onClick="javascript:location.href='CS_QnA_List.jsp'">
 				</td>
@@ -319,6 +322,37 @@ onsubmit="return checkInputs()" enctype="multipart/form-data">
     <div include-html="footer1.jsp"></div>
     <script>
       includeHTML();
+    </script>
+    <script>
+    //텍스트에어리어 밑으로 
+var form = document.postFrm; //사용하는 form 이름을 변경한다. document.{A}
+  var oEditors = [];
+  nhn.husky.EZCreator.createInIFrame({
+      oAppRef: oEditors,
+      elPlaceHolder: "textAreaContent",
+      sSkinURI: "resources/editor/SmartEditor2Skin.html",
+      fCreator: "createSEditor2"
+  });
+   
+  // submit
+  function submitContents(elClickedObj) {
+      // 에디터의 내용이 textarea에 적용된다.
+      oEditors.getById["textAreaContent"].exec("UPDATE_CONTENTS_FIELD", [ ]);
+      var con = document.postFrm.inqContent; //텍스트에어리어 name값
+      con.value = document.getElementById("textAreaContent").value;
+      try {
+          elClickedObj.form.submit();
+      } catch(e) {
+       
+      }
+  }
+
+// textArea에 이미지 첨부
+function pasteHTML(filepath){
+    var sHTML = '<img src="<%=request.getContextPath()%>/resources/editor/upload/'+ filepath + '">';
+	  oEditors.getById["textAreaContent"].exec("PASTE_HTML", [ sHTML ]);
+}
+
     </script>
   </body>
 </html>

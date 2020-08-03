@@ -35,23 +35,19 @@ public class HomeController {
 		
 		return "index";
 	}
-	@RequestMapping(value="Choisuji")
-	public String Choisuji() {
-		return "Choisuji";
+	@RequestMapping(value="choisuji")
+	public String choisuji() {
+		return "choisuji";
 	}
 	
-	@RequestMapping(value="Heohakshin")
-	public String Heohakshin() {
-		return "Heohakshin";
+	@RequestMapping(value="gjgkrtls")
+	public String gjgkrtls() {
+		return "gjgkrtls";
 	}
 	
-	@RequestMapping(value="Kimyujin")
-	public String Kimyujin() {
-		return "Kimyujin";
-	}
-	@RequestMapping(value="JOMYEONGYOON")
-	public String JOMYEONGYOON() {
-		return "JOMYEONGYOON";
+	@RequestMapping(value="kimyujin")
+	public String kimyujin() {
+		return "kimyujin";
 	}
 	
 }
