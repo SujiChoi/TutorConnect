@@ -1,0 +1,188 @@
+
+< HeidiSQL >
+
+네트워크 유형 : MySQL(TCP/IP)
+Library : libmariadb.dll
+데이터베이스 : busanit4033
+
+CREATE TABLE `tblarea` (
+	`city` VARCHAR(20) NULL COLLATE 'utf8_general_ci',  #시 
+	`street` VARCHAR(20) NULL COLLATE 'utf8_general_ci' #구
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `tblfaq` (
+	`faqcategory` VARCHAR(30) NULL COLLATE 'utf8_general_ci', #카테고리
+	`infoNum` INT(11) NOT NULL AUTO_INCREMENT, #글번호
+	`infoTitle` VARCHAR(30) NULL COLLATE 'utf8_general_ci', #Q
+	`infoContent` TEXT NULL COLLATE 'utf8_general_ci', #A
+	PRIMARY KEY (`infoNum`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `tblmatch` (
+	`follower` INT(10) NOT NULL, #찜한사람
+	`followed` INT(10) NOT NULL, #찜을 받은사람
+	`grade` INT(1) NOT NULL DEFAULT '0' #매칭시 1로 변경
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `tblmessage` (
+	`num` INT(11) NOT NULL AUTO_INCREMENT, #번호
+	`fromNum` INT(10) NOT NULL, #보낸사람
+	`toNum` INT(10) NOT NULL, #받는사람
+	`message` TEXT NULL COLLATE 'utf8_general_ci', #메세지
+	`sendTime` DATETIME NULL, #보낸시간
+	`ip` VARCHAR(20) NULL COLLATE 'utf8_general_ci', #ip수집
+	`notRead` INT(1) UNSIGNED ZEROFILL NOT NULL DEFAULT '0', #읽은거 표시
+	PRIMARY KEY (`num`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `tblqna` (
+	`inqNum` INT(11) NOT NULL AUTO_INCREMENT, #문의번호
+	`fromNum` INT(11) NULL, #문의자(회원고유번호)
+	`inqTitle` CHAR(100) NULL COLLATE 'utf8_general_ci', #문의제목
+	`inqContent` TEXT NULL COLLATE 'utf8_general_ci', #문의내용
+	`inqDate` DATETIME NULL, #문의일자
+	`pos` INT(11) NULL, #답글이 몇번째인지
+	`ref` INT(11) NULL, #답글을 단 글
+	`depth` INT(11) NULL, #답글의답글
+	`filename` VARCHAR(50) NULL COLLATE 'utf8_general_ci', #첨부파일이름
+	`secret` CHAR(2) NULL DEFAULT '0' COLLATE 'utf8_general_ci', #비밀글
+	PRIMARY KEY (`inqNum`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `tblreport` (
+	`reportNum` INT(11) NOT NULL AUTO_INCREMENT, #신고번호
+	`fromNum` INT(11) NOT NULL, #신고자
+	`toNum` INT(11) NULL, #신고대상
+	`reportContent` TEXT NULL COLLATE 'utf8_general_ci', #신고내용
+	`reportDate` DATETIME NULL,  #신고시간
+	`reportImage` VARCHAR(300) NULL COLLATE 'utf8_general_ci', #이미지파일이름
+	`reportCheck` INT(11) NULL DEFAULT '1', #대기, 확인 
+	PRIMARY KEY (`reportNum`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `tblreview` (
+	`num` INT(11) NOT NULL AUTO_INCREMENT,
+	`fromNum` INT(10) NOT NULL,
+	`toNum` INT(10) NOT NULL,
+	`ip` VARCHAR(20) NULL COLLATE 'utf8_general_ci',
+	`reviewAvailable` INT(1) NULL DEFAULT '0',
+	`reviewContent` TEXT NULL COLLATE 'utf8_general_ci',
+	`reviewRate` INT(2) NULL,
+	`userImage` VARCHAR(300) NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`num`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `tblroot` (
+	`rootId` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci', #관리자 아이디
+	`rootPwd` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci', #관리자 비밀번호
+	PRIMARY KEY (`rootId`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `tblstudent` (
+	`userNum` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`sRecord` CHAR(1) NOT NULL COLLATE 'utf8_general_ci',
+	`sYear` CHAR(1) NOT NULL COLLATE 'utf8_general_ci',
+	`sSubject1` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`sSubject2` VARCHAR(30) NULL COLLATE 'utf8_general_ci',
+	`sSubject3` VARCHAR(30) NULL COLLATE 'utf8_general_ci',
+	`sArea1` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`sArea2` VARCHAR(30) NULL COLLATE 'utf8_general_ci',
+	`sArea3` VARCHAR(30) NULL COLLATE 'utf8_general_ci',
+	`sDay` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`sTime` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`sFee` INT(11) NOT NULL DEFAULT '0',
+	`sDate` DATE NULL,
+	`sNickname` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`sGrade` INT(5) NOT NULL DEFAULT '0',
+	`sOpen` INT(1) NULL DEFAULT '0',
+	PRIMARY KEY (`userNum`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `tblsubject` (
+	`major` VARCHAR(20) NULL COLLATE 'utf8_general_ci', #대분류
+	`minor` VARCHAR(20) NULL COLLATE 'utf8_general_ci' #소분류
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `tblteacher` (
+	`userNum` INT(11) NOT NULL DEFAULT '0',
+	`tRecord` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`tRange` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`tSubject1` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`tSubject2` VARCHAR(30) NULL COLLATE 'utf8_general_ci',
+	`tSubject3` VARCHAR(30) NULL COLLATE 'utf8_general_ci',
+	`tArea1` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`tArea2` VARCHAR(30) NULL COLLATE 'utf8_general_ci',
+	`tArea3` VARCHAR(30) NULL COLLATE 'utf8_general_ci',
+	`tDay` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`tTime` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`tFee` INT(11) NOT NULL DEFAULT '0',
+	`tNickname` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`tPR` TEXT NULL COLLATE 'utf8_general_ci',
+	`tGrade` INT(5) NOT NULL DEFAULT '0',
+	`tDate` DATE NULL,
+	`tImage` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`tFile` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`tOpen` INT(1) NULL DEFAULT '0',
+	PRIMARY KEY (`userNum`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `tbluser` (
+	`userNum` INT(10) NOT NULL AUTO_INCREMENT,
+	`userId` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`userPwd` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`userName` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`userAddress` VARCHAR(100) NOT NULL COLLATE 'utf8_general_ci',
+	`userPhone` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`userEmail` VARCHAR(100) NOT NULL COLLATE 'utf8_general_ci',
+	`userBirth` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`userGender` INT(11) NOT NULL DEFAULT '0',
+	`userAddress2` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`userlastmessage` INT(11) NULL DEFAULT '0',
+	PRIMARY KEY (`userNum`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
