@@ -1,0 +1,92 @@
+@charset "EUC-KR";
+
+.search{/*바깥 큰 테두리*/
+		border: 1px solid grey;
+		background-color: white;
+		height: 780px;
+}
+.area{ /*지역 안쪽 회색*/
+	margin : 25px 25px 10px 25px;
+	background-color: rgb(224, 224, 224);
+}
+.tablecity{/*지역 테이블 크기*/
+	margin : 0px 15px;
+	padding: 0px 0px 15px;
+}
+h3{
+	margin: 0px;
+	text-align: center;
+}
+input{
+	margin: 0px;
+	height: 30px;
+    border: 1px solid #666666;
+    border-radius: 6px;
+	/* 중앙정렬하기 */
+	display : block;
+	margin : 0 auto;
+}
+.tddcity{
+	background-color: white;
+}
+.tdcity{ /*지역 블록 크기*/
+	padding: 5px 10px;
+	background-color: white;
+	width: 12vw;
+	text-align: center;
+	font-size: 13px;
+}
+
+.tdcitytitle{
+	padding: 10px 10px;
+	background-color: rgb(224, 224, 224);
+	width: 5vw;
+	text-align: center;
+}
+.city{ /*지역 블록 크기*/
+	padding: 0px 10px 15px;
+	margin : auto;
+}
+.tfee{ /*금액 안쪽 회색*/
+	width:500px;
+	height:130px;
+	float : right;
+	margin:0px 25px 10px;
+	background-color: rgb(224, 224, 224);
+}
+.ttime{ /*시간 안쪽 회색*/
+	width:500px;
+	float : right;
+	margin:0px 25px 10px;
+	background-color: rgb(224, 224, 224);
+}
+.tday{
+	width:500px;
+	float : left;
+	margin:0px 0px 25px 25px;
+	background-color: rgb(224, 224, 224);
+}
+.tAge{ /*시간 안쪽 회색*/
+	width:500px;
+	float : right;
+	margin:0px 25px 25px;
+	background-color: rgb(224, 224, 224);
+}
+.tGender{
+	width:500px;
+	float:left;
+	margin:0px 0px 25px 25px;
+	background-color: rgb(224, 224, 224);
+}
+
+.MemberButton {
+        cursor: pointer;
+        font-size: 20px;
+        background-color: rgb(88, 193, 137);
+        width: 230px;
+        height: 72px;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-weight: 800;
+ }
